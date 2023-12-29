@@ -74,23 +74,25 @@ const data = [
 ]
 const TransactionChart = () => {
   return (
-    <div className=' h-[400px] bg-white rounded-sm flex flex-col flex-1'>
-      <div className='w-full mt-3 text-base flex-1'>
-        <ResponsiveContainer width='100%' height='100%'>
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{ top: 20, right: 10, left: -10, bottom: 0 }}
-          >
-            <CartesianGrid strokeDasharray='3 3 0 0' vertical={false} />`
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey='expense' fill='#8884d8' />
-            <Bar dataKey='income' fill='#82ca9d' />`
-          </BarChart>
+    <div className='h-[400px] bg-white rounded-sm flex flex-col flex-1 p-5'>
+      <strong className='text-xl text-neutral-600 font-popins'>Transaction</strong>
+      <div className='w-full mt-3 text-sm flex-1'>
+        <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          width={800}
+          height={300}
+          data={data}
+          margin={{ top: 20, right: 10, left: -10, bottom: 0 }}
+          className=' font-popins'
+        >
+          <CartesianGrid strokeDasharray='3 3 0 0' vertical={false} />`
+          <XAxis dataKey='name' />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey='income' fill='#8884d8' />
+          <Bar dataKey='expense' fill='#82ca9d' />`
+        </BarChart>
         </ResponsiveContainer>
       </div>
     </div>
