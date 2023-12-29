@@ -7,7 +7,7 @@ import { IoLogOut } from 'react-icons/io5'
 
 const Sidebar = () => {
   return (
-    <div className='flex flex-col bg-indigo-950 w-60 p-3 h-screen text-white font-popins'>
+    <div className='lg:flex hidden flex-col bg-indigo-950 w-60 p-3 h-screen text-white font-popins'>
       <div className='flex flex-row items-center gap-2 py-2'>
         <FcMindMap size={28} />
         <span className='text-3xl font-crimson font-bold text-neutral-300'>

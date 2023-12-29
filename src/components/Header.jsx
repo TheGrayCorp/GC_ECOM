@@ -5,7 +5,7 @@ import { IoChatboxEllipses, IoNotifications } from 'react-icons/io5'
 const Header = () => {
   return (
     <div className='flex justify-between items-center h-16 px-6 font-popins bg-white shadow-sm'>
-      <div className='relative'>
+      <div className='relative md:flex hidden'>
         <IoMdSearch
           size={25}
           className='text-gray-400 absolute top-1/2 -translate-y-1/2 left-3'

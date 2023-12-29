@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const RootLayout = () => {
   return (
@@ -11,8 +12,10 @@ const RootLayout = () => {
       </div>
       <div className='flex-1'>
         <Header />
-        <Outlet/>
-        <div>Footer</div>
+        <div className='bg-gray-200 max-h-screen p-4'>
+          <Outlet />
+        </div>
+        <Footer />
       </div>
     </div>
   )
