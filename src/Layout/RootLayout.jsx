@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
+import Header from '../components/Header'
 
 const RootLayout = () => {
   return (
@@ -8,9 +9,9 @@ const RootLayout = () => {
       <div>
         <Sidebar />
       </div>
-      <div className='p-4'>
-        <div>Header</div>
-        <Outlet />
+      <div className='flex-1'>
+        <Header />
+        <Outlet/>
         <div>Footer</div>
       </div>
     </div>

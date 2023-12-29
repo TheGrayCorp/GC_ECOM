@@ -11,6 +11,7 @@ import Customers from './components/Customers'
 import Message from './components/Message'
 import Settings from './components/Settings'
 import Support from './components/Support'
+import Profile from './components/Profile'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path='message' element={<Message />} />
             <Route path='settings' element={<Settings />} />
             <Route path='support' element={<Support />} />
+            <Route path='profile' element={<Profile />} />
           </Route>
           <Route path='login' element={<LoginScreen />} />
           <Route path='register' element={<RegisterScreen />} />
