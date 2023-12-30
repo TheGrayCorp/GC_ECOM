@@ -6,13 +6,13 @@ import Footer from '../components/Footer'
 
 const RootLayout = () => {
   return (
-    <div className='flex felx-row h-screen w-screen overflow-hidden'>
-      <div>
+    <div className='flex flex-row h-screen overflow-hidden'>
+      <div className='fixed h-full'>
         <Sidebar />
       </div>
-      <div className='flex-1'>
+      <div className='flex-1 flex flex-col overflow-hidden lg:pl-60'>
         <Header />
-        <div className='bg-gray-200 max-h-screen p-4'>
+        <div className='flex-1 overflow-y-auto bg-gray-200 p-4 '>
           <Outlet />
         </div>
         <Footer />
