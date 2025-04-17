@@ -1,31 +1,34 @@
 import React from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import { IoChatboxEllipses, IoNotifications } from 'react-icons/io5'
-
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import pirathaImage from "../assets/Piratha.jpg";
 const Header = () => {
   return (
-    <div className='flex justify-between items-center h-16 px-6 font-popins bg-white shadow-sm'>
+    <div className='flex justify-between items-center h-12 px-6 font-popins bg-white shadow-sm'>
       <div className='relative md:flex hidden'>
         <IoMdSearch
-          size={25}
+          size={22}
           className='text-gray-400 absolute top-1/2 -translate-y-1/2 left-3'
         />
         <input
           type='text'
           placeholder='Search...'
-          className='focus:outline-none active:outline-none h-10 w-80 border border-gray-300 pl-11 text-base rounded-md'
+          className='focus:outline-none active:outline-none h-8 
+          w-80 border border-gray-300 pl-11 text-sm rounded-md '
         />
       </div>
       <div className='flex flex-row items-center gap-1'>
         <button className='btn btn-ghost btn-circle'>
           <IoChatboxEllipses
-            size={25}
+            size={22}
             className='text-indigo-500 cursor-pointer'
           />
         </button>
         <button className='btn btn-ghost btn-circle'>
           <IoNotifications
-            size={25}
+            size={22}
             className='text-indigo-500 cursor-pointer'
           />
         </button>
@@ -36,12 +39,12 @@ const Header = () => {
             role='button'
             className='btn btn-ghost btn-circle avatar'
           >
-            <div className='w-10 rounded-full'>
-              <img
-                alt='Tailwind CSS Navbar component'
-                src='https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
-              />
+            <div className='w-9 rounded-full'>
+            <Stack direction="row" spacing={2}>
+            <Avatar alt="Remy Sharp" src={pirathaImage} />
+            </Stack>
             </div>
+            
           </div>
           <ul
             tabIndex={0}

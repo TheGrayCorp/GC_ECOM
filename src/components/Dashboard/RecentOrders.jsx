@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getOrderStatus } from '../assets/StatusColor'
+import { getOrderStatus } from '../../assets/StatusColor'
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
 
 const RecentOrders = () => {
-  const recentOrders = [
+  const rows = [
     {
+      id: 1,
       productID: 'P001',
       productName: 'Laptop',
       customerName: 'John Doe',
@@ -14,6 +17,7 @@ const RecentOrders = () => {
       orderStatus: 'Processing',
     },
     {
+      id: 2,
       productID: 'P002',
       productName: 'Smartphone',
       customerName: 'Jane Smith',
@@ -23,6 +27,7 @@ const RecentOrders = () => {
       orderStatus: 'Shipped',
     },
     {
+      id: 3,
       productID: 'P003',
       productName: 'Camera',
       customerName: 'Bob Johnson',
@@ -32,6 +37,7 @@ const RecentOrders = () => {
       orderStatus: 'Delivered',
     },
     {
+      id: 4,
       productID: 'P004',
       productName: 'Headphones',
       customerName: 'Alice Brown',
@@ -41,6 +47,7 @@ const RecentOrders = () => {
       orderStatus: 'Shipped',
     },
     {
+      id:5,
       productID: 'P005',
       productName: 'Tablet',
       customerName: 'Charlie Davis',
@@ -50,6 +57,7 @@ const RecentOrders = () => {
       orderStatus: 'Processing',
     },
     {
+      id:6,
       productID: 'P006',
       productName: 'Printer',
       customerName: 'Eva White',
@@ -59,6 +67,7 @@ const RecentOrders = () => {
       orderStatus: 'Delivered',
     },
     {
+      id:7,
       productID: 'P007',
       productName: 'Gaming Console',
       customerName: 'Sam Robinson',
@@ -68,6 +77,7 @@ const RecentOrders = () => {
       orderStatus: 'Processing',
     },
     {
+      id:8,
       productID: 'P008',
       productName: 'Smartwatch',
       customerName: 'Mia Miller',
@@ -77,6 +87,7 @@ const RecentOrders = () => {
       orderStatus: 'Shipped',
     },
     {
+      id:9,
       productID: 'P009',
       productName: 'Wireless Earbuds',
       customerName: 'Noah Wilson',
@@ -86,71 +97,69 @@ const RecentOrders = () => {
       orderStatus: 'Delivered',
     },
     {
+      id:10,
       productID: 'P010',
       productName: 'External Hard Drive',
       customerName: 'Olivia Lee',
       orderDate: '2023-04-05',
       orderTotal: 149.0,
       shippingAddress: '707 Maple Lane, Cityville, Country',
-      orderStatus: 'Processing',
+      orderStatus: 'Processing'
     },
   ]
 
+  const columns = [
+    { field: 'productID', headerName: 'Product ID',width: 100, },
+    { field: 'productName', headerName: 'Product Name',width: 200, },
+    { field: 'customerName', headerName: 'Customer Name',width: 250,},
+    { field: 'orderDate', headerName: 'Order Date', width: 150,},
+    { field: 'orderTotal', headerName: 'Order Total', width:150,},
+    { field: 'shippingAddress', headerName: 'hipping Address', width:150,},
+    { field: 'orderStatus', headerName: 'Order Status', width: 150,},
+  ];
+  
+  const paginationModel = { page: 0, pageSize: 5 };
+  
   return (
-    <div className=' bg-white rounded-sm px-4 py-3 flex-1 p-5 font-popins'>
+    <div className=' rounded-sm px-4 py-3 flex-1 p-5 font-popins'>
       <strong className=' text-neutral-700 text-xl'>RecentOrders</strong>
+      <div className='h-3'></div>
       <div className='mt-3'>
         <table className='w-full text-gray-600 table-auto'>
           <thead>
             <tr>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Product ID
+            {columns.map((column,id)=>(
+              <td key={id} className='py-4 text-sm font-medium px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
+                {column.headerName}
               </td>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Product Name
-              </td>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Customer Name
-              </td>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Order Date
-              </td>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Order Total
-              </td>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Shipping Address
-              </td>
-              <td className='py-4 px-5 border-b shadow-sm bg-gray-100 border-gray-200'>
-                Order Status
-              </td>
+            ))}
             </tr>
           </thead>
           <tbody>
-            {recentOrders.map((orders) => (
-              <tr key={orders.productID}>
+            {rows.map((orders,id) => (
+              <tr key={id}>
                 <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-sky-500 hover:underline'>
                   <Link to={`/products/${orders.productID}`}>
                     {orders.productID}
                   </Link>
                 </td>
-                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-sky-500 hover:underline'>
+                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-opacity-30 hover:underline'>
                   <Link to={`/products/${orders.productName}`}>
                     {orders.productName}
                   </Link>
                 </td>
-                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-sky-500 hover:underline'>
+                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-opacity-30 hover:underline'>
                   <Link to={`/customers/${orders.customerName}`}>
                     {orders.customerName}
                   </Link>
                 </td>
-                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm'>
-                  {new Date(orders.orderDate).toLocaleDateString()}
+                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-opacity-30'>
+                  {orders.orderDate}
                 </td>
-                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm'>
+                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-opacity-30'>
                   {orders.orderTotal}
                 </td>
-                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm'>
+                <td className='py-3 px-5 border-b shadow-sm bg-white text-sm text-opacity-30'>
                   S{orders.shippingAddress}
                 </td>
                 <td className='py-3 px-5 border-b shadow-sm bg-white text-sm'>
@@ -166,3 +175,9 @@ const RecentOrders = () => {
 }
 
 export default RecentOrders
+
+/*
+
+
+
+*/

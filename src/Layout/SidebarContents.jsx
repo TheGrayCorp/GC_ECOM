@@ -1,11 +1,9 @@
-import { MdSpaceDashboard } from 'react-icons/md'
-import { IoMdCube } from 'react-icons/io'
-import { FaCartShopping } from 'react-icons/fa6'
-import { FaUserShield } from 'react-icons/fa'
-import { MdEditDocument } from 'react-icons/md'
-import { AiFillMessage } from 'react-icons/ai'
+import { AiFillMessage } from "react-icons/ai"
+import { FaCartShopping, FaUserShield } from "react-icons/fa6"
+import { IoMdCube, IoMdSettings } from "react-icons/io"
+import { MdContactSupport, MdEditDocument, MdSpaceDashboard } from "react-icons/md"
 
-const TOP_SIDEBAR_LINKS = [
+export const TOP_SIDEBAR_LINKS = [
   {
     key: 'dashboard',
     label: 'Dashboard',
@@ -44,4 +42,17 @@ const TOP_SIDEBAR_LINKS = [
   },
 ]
 
-export default TOP_SIDEBAR_LINKS
+export const BOTTOM_SIDEBAR_LINKS = [
+  {
+    key: 'settings',
+    label: 'Settings',
+    path: '/settings',
+    icon: <IoMdSettings />,
+  },
+  {
+    key: 'support',
+    label: 'Help & Support',
+    path: '/support',
+    icon: <MdContactSupport />,
+  },
+]
