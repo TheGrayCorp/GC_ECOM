@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 15 Pro",
+    "category": "Mobiles",
+    "brand": "Apple",
+    "color": "Titanium",
+    "price": 1199,
+    "description": "The latest iPhone with A17 chip and titanium body.",
+    "image": "/images/iphone15pro.png"
+  },
+  {
+    "id": 2,
+    "name": "MacBook Air M3",
+    "category": "Laptops",
+    "brand": "Apple",
+    "color": "Space Gray",
+    "price": 1299,
+    "description": "Powerful and lightweight laptop with M3 chip.",
+    "image": "/images/macbookairm3.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Galaxy S24 Ultra",
+    "category": "Mobiles",
+    "brand": "Samsung",
+    "color": "Phantom Black",
+    "price": 1099,
+    "description": "Samsung’s flagship phone with powerful camera and AI features.",
+    "image": "/images/galaxys24ultra.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Dell XPS 15",
+    "category": "Laptops",
+    "brand": "Dell",
+    "color": "Silver",
+    "price": 1499,
+    "description": "High-performance laptop with 4K display and Intel i9 processor.",
+    "image": "/images/dellxps15.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Sony WH-1000XM5",
+    "category": "Headphones",
+    "brand": "Sony",
+    "color": "Matte Black",
+    "price": 399,
+    "description": "Industry-leading noise-canceling over-ear headphones.",
+    "image": "/images/sonywh1000xm5.jpg"
+  },
+  {
+    "id": 6,
+    "name": "iPad Pro M2",
+    "category": "Tablets",
+    "brand": "Apple",
+    "color": "Space Gray",
+    "price": 999,
+    "description": "The ultimate iPad experience with the powerful M2 chip.",
+    "image": "/images/ipadprom2.jpg"
+  },
+  {
+    "id": 7,
+    "name": "ASUS ROG Phone 7",
+    "category": "Mobiles",
+    "brand": "ASUS",
+    "color": "Storm White",
+    "price": 899,
+    "description": "Gaming smartphone with Snapdragon 8 Gen 2 and 165Hz AMOLED.",
+    "image": "/images/asusrogphone7.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Canon EOS R7",
+    "category": "Cameras",
+    "brand": "Canon",
+    "color": "Black",
+    "price": 1499,
+    "description": "APS-C mirrorless camera for pro photographers and videographers.",
+    "image": "/images/canoneosr7.jpg"
+  },
+  {
+    "id": 9,
+    "name": "LG C3 OLED TV 55\"",
+    "category": "Televisions",
+    "brand": "LG",
+    "color": "Black",
+    "price": 1599,
+    "description": "4K OLED smart TV with AI-enhanced picture and Dolby Vision.",
+    "image": "/images/lgc3oled.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Bose SoundLink Flex",
+    "category": "Speakers",
+    "brand": "Bose",
+    "color": "Stone Blue",
+    "price": 149,
+    "description": "Portable Bluetooth speaker with deep, clear, immersive sound.",
+    "image": "/images/bosesoundlinkflex.jpg"
+  }
+]
