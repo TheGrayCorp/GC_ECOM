@@ -151,7 +151,7 @@ export default function ProductTable() {
                         category: "",
                         brand: "",
                         color: "",
-                        price: "",
+                        sellingPrice: "",
                       });
                       setAddDialogOpen(true);
                     }}
@@ -200,7 +200,7 @@ export default function ProductTable() {
                 <TableCell align="center">{product.category}</TableCell>
                 <TableCell align="center">{product.brand}</TableCell>
                 <TableCell align="center">{product.color}</TableCell>
-                <TableCell align="center">${product.price}</TableCell>
+                <TableCell align="center">${product.sellingPrice}</TableCell>
                 <TableCell align="center">
                   <IconButton
                     color="primary"
@@ -252,7 +252,6 @@ export default function ProductTable() {
         </div>
       </TableContainer>
 
-      {/* Edit Dialog */}
       {editProduct && (
         <Dialog open onClose={() => setEditProduct(null)}>
           <DialogTitle>Edit Product</DialogTitle>
@@ -280,7 +279,6 @@ export default function ProductTable() {
         </Dialog>
       )}
 
-      {/* Add Dialog */}
       {addDialogOpen && (
         <Dialog open onClose={() => setAddDialogOpen(false)}>
           <DialogTitle>Add New Product</DialogTitle>

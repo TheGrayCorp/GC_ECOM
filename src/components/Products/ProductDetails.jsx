@@ -2,25 +2,17 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import {
-  Card,
-  CardContent,
-  Typography,
-  Button,
   CircularProgress,
   Box,
   Grid,
-  Chip,
-  Fade,
-  Zoom,
-  IconButton,
-  Tooltip,
+  Typography,
+  Button,
+  Card,
+  CardMedia,
+  Paper,
+  Divider,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
-// Fetcher function for SWR
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function ProductDetails() {
@@ -32,17 +24,13 @@ export default function ProductDetails() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Handle edit product
   const handleEdit = () => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  // Handle delete product with confirmation
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      // Add your delete logic here
       console.log("Deleting product:", id);
-      // After successful deletion, navigate back
       navigate("/admin/products");
     }
   };
@@ -50,14 +38,12 @@ export default function ProductDetails() {
   if (error)
     return (
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
       >
-        <Typography variant="h6" color="error">
+        <Typography color="error" variant="h6">
           Failed to load product
         </Typography>
       </Box>
@@ -66,12 +52,10 @@ export default function ProductDetails() {
   if (!data)
     return (
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
       >
         <CircularProgress />
       </Box>
@@ -82,229 +66,177 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
       >
         <Typography variant="h6">Product not found</Typography>
       </Box>
     );
   }
 
+  const galleryImages = product.gallery || [];
+  const displayGallery = galleryImages.slice(0, 4);
+
+  while (displayGallery.length < 4) {
+    displayGallery.push(product.image);
+  }
+
+  const leftDetails = [
+    { label: "Description", value: product.description },
+    { label: "Max Discount", value: product.maxDiscount },
+    { label: "Volume", value: product.volume },
+    { label: "Height", value: product.height },
+    { label: "Width", value: product.width },
+    { label: "Length", value: product.length },
+  ];
+
+  const rightDetails = [
+    { label: "Product ID", value: product.id },
+    { label: "Quantity", value: product.quantity },
+    { label: "Extra Code", value: product.extraCode },
+    { label: "Category", value: product.category },
+    { label: "Sub Category", value: product.subCategory },
+    { label: "Varity", value: product.varity },
+    { label: "Weight", value: product.weight },
+    { label: "Type", value: product.type },
+    { label: "Brand", value: product.brand },
+    { label: "Purchased Price", value: product.purchasedPrice },
+    { label: "Selling Price", value: product.sellingPrice },
+  ];
+
   return (
-    <Fade in={true} timeout={800}>
+    <Box sx={{ width: "100%", margin: "0 auto", p: 3 }}>
+      {/* Title Row */}
       <Box
-        sx={{
-          padding: "20px",
-          maxWidth: "1000px",
-          margin: "20px auto",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.12)",
-          borderRadius: "16px",
-          overflow: "hidden",
-          backgroundColor: "#fafafa",
-        }}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={1}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "20px",
-          }}
-        >
+        <Typography variant="h5">{product.name}</Typography>
+
+        <Box>
           <Button
             variant="contained"
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate(-1)}
-            sx={{
-              borderRadius: "25px",
-              padding: "10px 20px",
-              backgroundColor: "#3f51b5",
-              boxShadow: "0 4px 20px rgba(63, 81, 181, 0.4)",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "#303f9f",
-                transform: "translateY(-2px)",
-                boxShadow: "0 6px 25px rgba(63, 81, 181, 0.6)",
-              },
-            }}
+            color="error"
+            size="small"
+            onClick={handleDelete}
+            sx={{ mr: 1 }}
           >
-            Back to Products
+            Delete
           </Button>
-
-          <Box>
-            <Tooltip title="Edit Product">
-              <IconButton
-                onClick={handleEdit}
-                sx={{
-                  color: "#4caf50",
-                  backgroundColor: "rgba(76, 175, 80, 0.1)",
-                  marginRight: "10px",
-                  transition: "all 0.2s ease",
-                  "&:hover": {
-                    backgroundColor: "rgba(76, 175, 80, 0.2)",
-                    transform: "scale(1.1)",
-                  },
-                }}
-              >
-                <EditIcon />
-              </IconButton>
-            </Tooltip>
-
-            <Tooltip title="Delete Product">
-              <IconButton
-                onClick={handleDelete}
-                sx={{
-                  color: "#f44336",
-                  backgroundColor: "rgba(244, 67, 54, 0.1)",
-                  transition: "all 0.2s ease",
-                  "&:hover": {
-                    backgroundColor: "rgba(244, 67, 54, 0.2)",
-                    transform: "scale(1.1)",
-                  },
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          </Box>
-        </Box>
-
-        <Zoom in={true} timeout={1000}>
-          <Card
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              overflow: "hidden",
-              borderRadius: "12px",
-              boxShadow: "none",
-            }}
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={handleEdit}
           >
-            <CardContent
-              sx={{
-                flex: "1 0 50%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                padding: "32px",
-              }}
-            >
-              <div>
-                <Chip
-                  label={product.category}
-                  size="small"
-                  sx={{
-                    backgroundColor: "#e3f2fd",
-                    color: "#1976d2",
-                    marginBottom: "16px",
-                  }}
-                />
+            Edit
+          </Button>
+        </Box>
+      </Box>
 
-                <Typography
-                  variant="h3"
-                  component="h1"
-                  gutterBottom
-                  sx={{
-                    fontWeight: "700",
-                    marginBottom: "16px",
-                    color: "#212121",
-                  }}
-                >
-                  {product.name}
-                </Typography>
+      {/* Divider */}
+      <Divider sx={{ mb: 3 }} />
 
-                <Grid container spacing={2} sx={{ marginBottom: "24px" }}>
-                  <Grid item xs={6}>
-                    <Typography variant="subtitle1" color="text.secondary">
-                      Brand
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontWeight: "500" }}>
-                      {product.brand}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography variant="subtitle1" color="text.secondary">
-                      Color
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontWeight: "500" }}>
-                      {product.color}
-                    </Typography>
-                  </Grid>
-                </Grid>
-
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: "#424242",
-                    lineHeight: "1.8",
-                    marginBottom: "24px",
-                  }}
-                >
-                  {product.description}
-                </Typography>
-              </div>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginTop: "auto",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    backgroundColor: "#f0f7ff",
-                    borderRadius: "8px",
-                    padding: "8px 16px",
-                  }}
-                >
-                  <LocalOfferIcon
-                    sx={{ color: "#2196f3", marginRight: "8px" }}
-                  />
-                  <Typography
-                    variant="h5"
-                    sx={{ fontWeight: "700", color: "#2196f3" }}
-                  >
-                    ${product.price}
-                  </Typography>
-                </Box>
-              </Box>
-            </CardContent>
+      <Grid container spacing={3} sx={{ width: "100%" }}>
+        <Grid item xs={6} md={8} sx={{ width: "50%" }}>
+          <Box>
+            <Card elevation={1} sx={{ mb: 2 }}>
+              <CardMedia
+                component="img"
+                image={product.image}
+                alt={product.name}
+                sx={{ objectFit: "contain", bgcolor: "#f9f9f9", height: 190 }}
+              />
+            </Card>
 
             <Box
-              sx={{
-                flex: "1 0 50%",
-                position: "relative",
-                minHeight: { xs: "300px", md: "auto" },
-                overflow: "hidden",
-                borderRadius: { xs: "0", md: "0 12px 12px 0" },
-              }}
+              display="flex"
+              flexWrap="wrap"
+              gap={1}
+              mb={2}
+              sx={{ justifyContent: "space-between" }}
             >
-              <Box
-                component="img"
-                src={product.image}
-                alt={product.name}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  transition: "transform 0.7s ease",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                  },
-                  position: { md: "absolute" },
-                }}
-              />
+              {displayGallery.map((img, idx) => (
+                <Card
+                  key={idx}
+                  sx={{
+                    width: "calc(25% - 8px)",
+                    height: 70,
+                    p: 0.5,
+                    bgcolor: "#f9f9f9",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={img}
+                    alt={`Gallery ${idx + 1}`}
+                    sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+                  />
+                </Card>
+              ))}
             </Box>
-          </Card>
-        </Zoom>
-      </Box>
-    </Fade>
+            {leftDetails.map((field, index) => (
+              <Paper
+                key={index}
+                elevation={0}
+                sx={{
+                  display: "flex",
+                  bgcolor: "#f7f7f7",
+                  p: 1.5,
+                  mb: 1,
+                  borderRadius: 1,
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ width: "40%" }}
+                >
+                  {field.label}:
+                </Typography>
+                <Typography variant="body2" sx={{ width: "60%" }}>
+                  {field.value || "-"}
+                </Typography>
+              </Paper>
+            ))}
+          </Box>
+        </Grid>
+
+        <Grid item xs={6} md={4} sx={{ width: "45%" }}>
+          <Box>
+            {rightDetails.map((field, index) => (
+              <Paper
+                key={index}
+                elevation={0}
+                sx={{
+                  display: "flex",
+                  bgcolor: "#f7f7f7",
+                  p: 1.5,
+                  mb: 1,
+                  borderRadius: 1,
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ width: "40%", flexShrink: 0 }}
+                >
+                  {field.label}:
+                </Typography>
+                <Typography variant="body2" sx={{ width: "60%" }}>
+                  {field.value || "-"}
+                </Typography>
+              </Paper>
+            ))}
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
