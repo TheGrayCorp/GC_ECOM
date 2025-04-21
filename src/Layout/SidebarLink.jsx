@@ -11,7 +11,7 @@ const SidebarLink = ({ item }) => {
       ${
         pathname === item.path
           ? "text-colorText bg-secondaryLight"
-          : "text-lightText"
+          : "text-darkText"
       }`}
     >
       <span>{item.icon}</span>
