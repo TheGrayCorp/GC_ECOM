@@ -7,7 +7,6 @@ import {
   IconButton,
   Pagination,
   Paper,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -20,11 +19,8 @@ import {
   DialogContent,
   DialogActions,
   Snackbar,
-  MenuItem,
-  Select,
-  Typography,
 } from "@mui/material";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import { Download, Trash2, Move, Plus, Eye, Pencil } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -36,16 +32,17 @@ export default function ProductTable() {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [editProduct, setEditProduct] = useState(null);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
-  const [moveCategory, setMoveCategory] = useState("");
   const [snackbar, setSnackbar] = useState("");
-  const [page, setPage] = useState(1); // for pagination
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   const handleClearSearch = () => setSearchText("");
 
   const handleDeleteSelected = () => {
     if (window.confirm("Are you sure you want to delete selected items?")) {
-      const updated = data.filter((p) => !selectedProducts.includes(p.id));
+      const updated = data.products.filter(
+        (p) => !selectedProducts.includes(p.id)
+      );
       console.log("Updated after delete", updated);
       setSnackbar("Products deleted successfully");
       setSelectedProducts([]);
@@ -53,16 +50,8 @@ export default function ProductTable() {
   };
 
   const handleMoveSelected = () => {
-    if (!moveCategory) {
-      alert("Select a category to move to");
-      return;
-    }
-    const updated = data.map((p) =>
-      selectedProducts.includes(p.id) ? { ...p, category: moveCategory } : p
-    );
-    console.log("Updated after move", updated);
-    setSnackbar("Products moved successfully");
-    setSelectedProducts([]);
+    // functionality placeholder
+    alert("Move functionality not implemented in this snippet.");
   };
 
   const handleExport = () => {
@@ -84,24 +73,6 @@ export default function ProductTable() {
     );
   };
 
-  const handleEditSave = () => {
-    const updated = data.map((p) =>
-      p.id === editProduct.id ? editProduct : p
-    );
-    console.log("Updated after edit", updated);
-    setSnackbar("Product updated successfully");
-    setEditProduct(null);
-  };
-
-  const handleAddProduct = () => {
-    const newId = Math.max(...data.map((p) => p.id)) + 1;
-    const newProduct = { id: newId, ...editProduct };
-    const updated = [...data, newProduct];
-    console.log("Updated after add", updated);
-    setSnackbar("Product added successfully");
-    setAddDialogOpen(false);
-  };
-
   if (error) return <div>Failed to load products</div>;
   if (!data)
     return (
@@ -110,11 +81,11 @@ export default function ProductTable() {
       </Box>
     );
 
-  const filteredProducts = data.filter((product) =>
+  const filteredProducts = data.products.filter((product) =>
     product.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  // Pagination logic
+  // Pagination
   const itemsPerPage = 10;
   const startIndex = (page - 1) * itemsPerPage;
   const currentProducts = filteredProducts.slice(
@@ -151,7 +122,7 @@ export default function ProductTable() {
                         category: "",
                         brand: "",
                         color: "",
-                        sellingPrice: "",
+                        price: "",
                       });
                       setAddDialogOpen(true);
                     }}
@@ -197,10 +168,14 @@ export default function ProductTable() {
                 </TableCell>
                 <TableCell align="center">{startIndex + index + 1}</TableCell>
                 <TableCell align="center">{product.name}</TableCell>
-                <TableCell align="center">{product.category}</TableCell>
+                <TableCell align="center">{product.category.sub}</TableCell>
                 <TableCell align="center">{product.brand}</TableCell>
-                <TableCell align="center">{product.color}</TableCell>
-                <TableCell align="center">${product.sellingPrice}</TableCell>
+                <TableCell align="center">
+                  {product.specifications.color.join(", ")}
+                </TableCell>
+                <TableCell align="center">
+                  {product.price.currency} {product.price.selling.toFixed(2)}
+                </TableCell>
                 <TableCell align="center">
                   <IconButton
                     color="primary"
@@ -210,7 +185,7 @@ export default function ProductTable() {
                   </IconButton>
                   <IconButton
                     color="secondary"
-                    onClick={() => setEditProduct(product)}
+                    onClick={() => navigate(`/products/edit/${product.id}`)}
                   >
                     <Pencil size={18} />
                   </IconButton>
@@ -219,97 +194,35 @@ export default function ProductTable() {
             ))}
           </TableBody>
         </Table>
-
-        <div className="flex justify-between items-center p-3">
-          <div className="flex gap-2">
-            <IconButton
-              color="primary"
-              onClick={handleMoveSelected}
-              disabled={selectedProducts.length === 0}
-            >
-              <Move size={20} />
-            </IconButton>
-            <IconButton
-              color="error"
-              onClick={handleDeleteSelected}
-              disabled={selectedProducts.length === 0}
-            >
-              <Trash2 size={20} />
-            </IconButton>
-            <IconButton color="primary" onClick={handleExport}>
-              <Download size={20} />
-            </IconButton>
-          </div>
-
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(filteredProducts.length / itemsPerPage)}
-              page={page}
-              onChange={(e, value) => setPage(value)}
-              shape="rounded"
-            />
-          </Stack>
-        </div>
       </TableContainer>
 
-      {editProduct && (
-        <Dialog open onClose={() => setEditProduct(null)}>
-          <DialogTitle>Edit Product</DialogTitle>
-          <DialogContent>
-            {Object.keys(editProduct).map((key) =>
-              key !== "id" ? (
-                <TextField
-                  key={key}
-                  margin="dense"
-                  label={key.charAt(0).toUpperCase() + key.slice(1)}
-                  fullWidth
-                  variant="standard"
-                  value={editProduct[key]}
-                  onChange={(e) =>
-                    setEditProduct({ ...editProduct, [key]: e.target.value })
-                  }
-                />
-              ) : null
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setEditProduct(null)}>Cancel</Button>
-            <Button onClick={handleEditSave}>Update</Button>
-          </DialogActions>
-        </Dialog>
-      )}
-
-      {addDialogOpen && (
-        <Dialog open onClose={() => setAddDialogOpen(false)}>
-          <DialogTitle>Add New Product</DialogTitle>
-          <DialogContent>
-            {Object.keys(editProduct).map((key) => (
-              <TextField
-                key={key}
-                margin="dense"
-                label={key.charAt(0).toUpperCase() + key.slice(1)}
-                fullWidth
-                variant="standard"
-                value={editProduct[key]}
-                onChange={(e) =>
-                  setEditProduct({ ...editProduct, [key]: e.target.value })
-                }
-              />
-            ))}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setAddDialogOpen(false)}>Cancel</Button>
-            <Button onClick={handleAddProduct}>Add</Button>
-          </DialogActions>
-        </Dialog>
-      )}
-
-      <Snackbar
-        open={!!snackbar}
-        autoHideDuration={3000}
-        message={snackbar}
-        onClose={() => setSnackbar("")}
-      />
+      <div className="flex justify-between items-center p-3">
+        <div className="flex gap-2">
+          <IconButton
+            color="primary"
+            onClick={handleMoveSelected}
+            disabled={selectedProducts.length === 0}
+          >
+            <Move size={20} />
+          </IconButton>
+          <IconButton
+            color="error"
+            onClick={handleDeleteSelected}
+            disabled={selectedProducts.length === 0}
+          >
+            <Trash2 size={20} />
+          </IconButton>
+          <IconButton color="secondary" onClick={handleExport}>
+            <Download size={20} />
+          </IconButton>
+        </div>
+        <Pagination
+          count={Math.ceil(filteredProducts.length / itemsPerPage)}
+          page={page}
+          onChange={(e, value) => setPage(value)}
+          color="primary"
+        />
+      </div>
     </div>
   );
 }

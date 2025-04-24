@@ -10,7 +10,7 @@ const Header = () => {
       <div className="relative md:flex hidden">
         <IoMdSearch
           size={22}
-          className="text-lightText absolute top-1/2 -translate-y-1/2 left-3"
+          className="text-lightText absolute top-1/2 -translate-y-1/2 left-3 "
         />
         <input
           type="text"
@@ -59,7 +59,7 @@ const Header = () => {
               <a href="/settings">Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a className="font-inter font-extralight">Logout</a>
             </li>
           </ul>
         </div>

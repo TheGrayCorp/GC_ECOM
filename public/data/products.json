@@ -1,124 +1,437 @@
-[
-  {
-    "id": 1,
-    "name": "iPhone 15 Pro",
-    "category": "Mobiles",
-    "subCategory": "Smartphones",
-    "brand": "Apple",
-    "color": "Titanium",
-    "purchasedPrice": 1100,
-    "sellingPrice": 1199,
-    "description": "The latest iPhone with A17 chip and titanium body.",
-    "image": "/images/iphone15pro.png",
-    "gallery": [
-      "/images/iphone15pro-front.png",
-      "/images/iphone15pro-back.png",
-      "/images/iphone15pro-side.png"
-    ],
-    "extraCode": "APL-IPH15PRO",
-    "varity": "Pro Series",
-    "maxDiscount": "10%",
-    "volume": "0.5L",
-    "height": "146.6mm",
-    "width": "70.6mm",
-    "length": "8.25mm",
-    "quantity": 50,
-    "weight": "187g",
-    "type": "Smartphone"
-  },
-  {
-    "id": 2,
-    "name": "MacBook Air M3",
-    "category": "Laptops",
-    "subCategory": "Ultrabook",
-    "brand": "Apple",
-    "color": "Space Gray",
-    "purchasedPrice": 1220,
-    "sellingPrice": 1299,
-    "description": "Powerful and lightweight laptop with M3 chip.",
-    "image": "/images/macbookairm3.jpg",
-    "gallery": [
-      "/images/macbookairm3-open.jpg",
-      "/images/macbookairm3-side.jpg"
-    ],
-    "extraCode": "APL-MACM3",
-    "varity": "Air Series",
-    "maxDiscount": "12%",
-    "volume": "1.2L",
-    "height": "11.3mm",
-    "width": "304.1mm",
-    "length": "212.4mm",
-    "quantity": 30,
-    "weight": "1.24kg",
-    "type": "Laptop"
-  },
-  {
-    "id": 3,
-    "name": "Galaxy S24 Ultra",
-    "category": "Mobiles",
-    "subCategory": "Smartphones",
-    "brand": "Samsung",
-    "color": "Phantom Black",
-    "purchasedPrice": 1020,
-    "sellingPrice": 1099,
-    "description": "Samsung’s flagship phone with powerful camera and AI features.",
-    "image": "/images/galaxys24ultra.jpg",
-    "gallery": ["/images/galaxys24-front.jpg", "/images/galaxys24-back.jpg"],
-    "extraCode": "SAM-S24U",
-    "varity": "Ultra Series",
-    "maxDiscount": "9%",
-    "volume": "0.55L",
-    "height": "163.4mm",
-    "width": "78.1mm",
-    "length": "8.9mm",
-    "quantity": 40,
-    "weight": "234g",
-    "type": "Smartphone"
-  },
-  {
-    "id": 4,
-    "name": "Dell XPS 15",
-    "category": "Laptops",
-    "subCategory": "Ultrabook",
-    "brand": "Dell",
-    "color": "Silver",
-    "purchasedPrice": 1400,
-    "sellingPrice": 1499,
-    "description": "High-performance laptop with 4K display and Intel i9 processor.",
-    "image": "/images/dellxps15.jpg",
-    "gallery": ["/images/dellxps15-open.jpg", "/images/dellxps15-side.jpg"],
-    "extraCode": "DEL-XPS15",
-    "varity": "XPS Series",
-    "maxDiscount": "13%",
-    "volume": "1.5L",
-    "height": "18mm",
-    "width": "344mm",
-    "length": "230mm",
-    "quantity": 25,
-    "weight": "1.92kg",
-    "type": "Laptop"
-  },
-  {
-    "id": 5,
-    "name": "Sony WH-1000XM5",
-    "category": "Headphones",
-    "subCategory": "Wireless",
-    "brand": "Sony",
-    "color": "Matte Black",
-    "purchasedPrice": 360,
-    "sellingPrice": 399,
-    "description": "Industry-leading noise-canceling over-ear headphones.",
-    "image": "/images/sonywh1000xm5.jpg",
-    "gallery": ["/images/sonywh1000xm5-side.jpg"],
-    "extraCode": "SONY-WHXM5",
-    "varity": "XM Series",
-    "maxDiscount": "15%",
-    "volume": "0.8L",
-    "height": "265mm",
-    "width": "210mm",
-    "length": "55mm",
-    "quantity": 60,
-    "weight": "250g",
-    "type": "Headphones"
-  }
-]
+{
+  "products": [
+    {
+      "id": "SW001",
+      "name": "DESERTTCAR Smart Watch",
+      "brand": "DESERTTCAR",
+      "status": "Active",
+      "stock": {
+        "status": "In Stock",
+        "quantity": 278
+      },
+      "contact": {
+        "email": "hello@deserttcar.com",
+        "phone": "+94 77 123 4567",
+        "location": "Colombo, Sri Lanka"
+      },
+      "price": {
+        "selling": 2345.0,
+        "cost": 1234.0,
+        "discount": "20%",
+        "tax": 1234.0,
+        "currency": "LKR"
+      },
+      "category": {
+        "main": "Watch",
+        "sub": "Smart Watch"
+      },
+      "description": {
+        "overview": "Stay connected, play, and stay stylish with this Multi Pro Smart Watch—a refined blend of innovation, technology, fashion, and deal design. Designed for modern living and engineered for peak performance through resilience and depth.",
+        "keyFeatures": [
+          "Heart Rate & Sleep Monitor - Real-time health tracking",
+          "Fitness Mode - Track steps, calories, distance & 15+ sports modes",
+          "Notifications - Calls, SMS, emails, messages, and app alerts",
+          "Water Protection (IP67) - Waterproof and dust-proof",
+          "Extended Battery Life (7 Days) - Lasts up to 7 days in normal usage"
+        ],
+        "technicalSpecification": [
+          "Display: 1.44 inch TFT HD (240x240)",
+          "Processor: Nordic 52832 chip",
+          "Charging Time: Less than 2 hours",
+          "Compatible with iOS 9.0+ & Android 5.0+",
+          "Material: Silicone, TPU, ABS+PC",
+          "Various: Silicone strap, lithium battery"
+        ],
+        "usageAndSetup": [
+          "1. Download the APP from App Store / Google Play",
+          "2. Turn on Bluetooth",
+          "3. Charge your smart watch first for your first use",
+          "4. Connect watch with your mobile by scanning the QR code on watch face, software, and more"
+        ],
+        "careInstructions": [
+          "Avoid exposure to hot water",
+          "Clean gently with a damp cloth",
+          "When charging, ensure magnetic cable is properly seated",
+          "Keep dry and clean when not in use"
+        ],
+        "warranty": "6 months under warranty (Under conditions apply)",
+        "returnAndSupport": "For 7 days return policy. For support, contact hello@deserttcar.com"
+      },
+      "images": [
+        "/images/SmartWatch.png",
+        "/images/smartWatch1.jpg",
+        "/images/smartWatch2.jpg",
+        "/images/smartWatch2.jpg",
+        "/images/smartWatch2.jpg"
+      ],
+      "ratings": {
+        "average": 4,
+        "count": 120
+      },
+      "specifications": {
+        "dimensions": {
+          "length": 15,
+          "width": 30,
+          "height": 120,
+          "unit": "cm"
+        },
+        "weight": 200,
+        "color": ["Black", "White", "Blue"],
+        "material": "Plastic",
+        "display": "1.44 inch full touch screen",
+        "waterProof": true,
+        "batteryLife": "72 hours"
+      },
+      "shipping": {
+        "method": "Flight",
+        "weight": 200,
+        "volume": "1000 ml"
+      },
+      "visibility": "Public",
+      "tags": ["Activity tracker", "pedometer", "simple style", "android phone"]
+    },
+    {
+      "id": "SW002",
+      "name": "FitPro Sports Watch",
+      "brand": "FitPro",
+      "status": "Active",
+      "stock": {
+        "status": "In Stock",
+        "quantity": 145
+      },
+      "contact": {
+        "email": "hello@deserttcar.com",
+        "phone": "+94 77 123 4567",
+        "location": "Colombo, Sri Lanka"
+      },
+      "price": {
+        "selling": 3200.0,
+        "cost": 1850.0,
+        "discount": "15%",
+        "tax": 1520.0,
+        "currency": "LKR"
+      },
+      "category": {
+        "main": "Watch",
+        "sub": "Sports Watch"
+      },
+      "description": {
+        "overview": "The FitPro Sports Watch is designed for athletes and fitness enthusiasts who demand precise tracking and durable performance. With advanced GPS and health monitoring features, it's your perfect workout companion.",
+        "keyFeatures": [
+          "Advanced GPS Tracking - Accurate route and distance mapping",
+          "24/7 Heart Rate Monitor - Continuous tracking with zone alerts",
+          "SpO2 Measurement - Track blood oxygen saturation levels",
+          "Multi-sport Modes - 20+ dedicated activity tracking profiles",
+          "5 ATM Water Resistance - Suitable for swimming and water sports"
+        ],
+        "technicalSpecification": [
+          "Display: 1.7 inch AMOLED (368x448)",
+          "Processor: Dual-core high-performance chip",
+          "Battery: Up to 96 hours in standard mode, 36 hours with GPS",
+          "Compatible with iOS 10.0+ & Android 6.0+",
+          "Sensors: Accelerometer, Gyroscope, Optical HR, Barometer",
+          "Construction: Aluminum alloy frame with corning glass"
+        ],
+        "usageAndSetup": [
+          "1. Download FitPro App from your device's app store",
+          "2. Create account or login to existing account",
+          "3. Follow in-app pairing instructions",
+          "4. Update firmware if prompted for best experience"
+        ],
+        "careInstructions": [
+          "Rinse with fresh water after swimming in salt water",
+          "Clean band regularly with mild soap solution",
+          "Avoid exposure to extreme temperatures",
+          "Keep charging contacts clean and dry"
+        ],
+        "warranty": "12 months comprehensive warranty",
+        "returnAndSupport": "30-day satisfaction guarantee. Support available via app or support@fitpro.com"
+      },
+      "images": [
+        "/path/to/fitpro-main.jpg",
+        "/path/to/fitpro-1.jpg",
+        "/path/to/fitpro-2.jpg"
+      ],
+      "ratings": {
+        "average": 4.5,
+        "count": 230
+      },
+      "specifications": {
+        "dimensions": {
+          "length": 16,
+          "width": 32,
+          "height": 110,
+          "unit": "cm"
+        },
+        "weight": 180,
+        "color": ["Red", "Black", "Green"],
+        "material": "Silicone and Metal",
+        "display": "1.7 inch AMOLED screen",
+        "waterProof": true,
+        "batteryLife": "96 hours"
+      },
+      "shipping": {
+        "method": "Air",
+        "weight": 180,
+        "volume": "800 ml"
+      },
+      "visibility": "Public",
+      "tags": ["GPS watch", "fitness tracker", "sports watch", "waterproof"]
+    },
+    {
+      "id": "SW003",
+      "name": "KidTrack Children's Smart Watch",
+      "brand": "KidTrack",
+      "status": "Active",
+      "stock": {
+        "status": "Low Stock",
+        "quantity": 32
+      },
+      "price": {
+        "selling": 1850.0,
+        "cost": 980.0,
+        "discount": "10%",
+        "tax": 850.0,
+        "currency": "LKR"
+      },
+      "category": {
+        "main": "Watch",
+        "sub": "Children's Watch"
+      },
+
+      "description": {
+        "overview": "The KidTrack Children's Smart Watch combines fun features kids love with the safety tools parents need. Designed specifically for children aged 4-12, this colorful and durable watch keeps families connected.",
+        "keyFeatures": [
+          "Real-time GPS Tracking - Know your child's location anytime",
+          "Two-way Calling - Connect with up to 10 pre-approved numbers",
+          "SOS Emergency Button - One-press alert to emergency contacts",
+          "Geofencing - Set safe zones and receive alerts",
+          "Class Mode - Disable features during school hours"
+        ],
+        "technicalSpecification": [
+          "Display: 1.2 inch touchscreen (240x240)",
+          "Battery: 450mAh, up to 48 hours standby",
+          "Connectivity: 4G LTE, Wi-Fi, Bluetooth",
+          "Water Resistance: IP67 (splash proof)",
+          "Camera: 0.3MP front camera",
+          "Materials: Food-grade silicone band, plastic casing"
+        ],
+        "usageAndSetup": [
+          "1. Insert nano SIM card (not included)",
+          "2. Download KidTrack Guardian app",
+          "3. Scan QR code on watch to pair with app",
+          "4. Add guardian contacts and configure settings"
+        ],
+        "careInstructions": [
+          "Remove watch for bathing or swimming",
+          "Clean with a slightly dampened cloth",
+          "Charge fully before first use",
+          "Store in a dry place when not in use"
+        ],
+        "warranty": "1 year limited warranty against manufacturing defects",
+        "returnAndSupport": "14-day return policy. Parent support available 7 days a week at help@kidtrack.com"
+      },
+      "images": [
+        "/path/to/kidtrack-main.jpg",
+        "/path/to/kidtrack-1.jpg",
+        "/path/to/kidtrack-2.jpg"
+      ],
+      "ratings": {
+        "average": 4.2,
+        "count": 95
+      },
+      "specifications": {
+        "dimensions": {
+          "length": 12,
+          "width": 25,
+          "height": 90,
+          "unit": "cm"
+        },
+        "weight": 120,
+        "color": ["Pink", "Blue", "Yellow"],
+        "material": "Food-grade Silicone",
+        "display": "1.2 inch touchscreen",
+        "waterProof": true,
+        "batteryLife": "48 hours"
+      },
+      "shipping": {
+        "method": "Ground",
+        "weight": 120,
+        "volume": "600 ml"
+      },
+      "visibility": "Public",
+      "tags": ["kids watch", "tracking device", "children", "safety"]
+    },
+    {
+      "id": "SW004",
+      "name": "EliteTime Premium Smart Watch",
+      "brand": "EliteTime",
+      "status": "Active",
+      "stock": {
+        "status": "In Stock",
+        "quantity": 87
+      },
+      "price": {
+        "selling": 5600.0,
+        "cost": 3200.0,
+        "discount": "5%",
+        "tax": 2480.0,
+        "currency": "LKR"
+      },
+      "category": {
+        "main": "Watch",
+        "sub": "Premium Watch"
+      },
+      "description": {
+        "overview": "The EliteTime Premium represents the pinnacle of smart watch technology. Crafted from premium materials with advanced health monitoring capabilities and elegant design, it's a statement piece for the discerning user who values both style and substance.",
+        "keyFeatures": [
+          "ECG Monitor - Medical-grade heart rhythm monitoring",
+          "Blood Pressure Monitor - Track systolic and diastolic readings",
+          "Fall Detection - Automatic emergency alerts",
+          "Cellular Connectivity - Make calls independent of smartphone",
+          "Premium Design - Sapphire crystal and stainless steel construction"
+        ],
+        "technicalSpecification": [
+          "Display: 1.9 inch Always-On OLED (484x484)",
+          "Processor: Quad-core 1.8GHz",
+          "Storage: 32GB internal storage",
+          "Battery: 420mAh, up to 5 days usage",
+          "Connectivity: 4G LTE, Wi-Fi, Bluetooth 5.2, NFC",
+          "Sensors: ECG, Blood Pressure, SpO2, Temperature, Accelerometer"
+        ],
+        "usageAndSetup": [
+          "1. Download EliteTime app from your device's app store",
+          "2. Power on watch and follow on-screen instructions",
+          "3. Complete health profile for accurate monitoring",
+          "4. Set up cellular plan if desired (eSIM supported)"
+        ],
+        "careInstructions": [
+          "Clean regularly with microfiber cloth",
+          "Use supplied charger only",
+          "Avoid exposure to chemicals and solvents",
+          "Service only through authorized centers"
+        ],
+        "warranty": "2 years extended warranty with option to purchase additional coverage",
+        "returnAndSupport": "45-day satisfaction guarantee. Premium support line available 24/7 at premium@elitetime.com"
+      },
+      "images": [
+        "/path/to/elitetime-main.jpg",
+        "/path/to/elitetime-1.jpg",
+        "/path/to/elitetime-2.jpg"
+      ],
+      "ratings": {
+        "average": 4.8,
+        "count": 65
+      },
+      "specifications": {
+        "dimensions": {
+          "length": 18,
+          "width": 35,
+          "height": 130,
+          "unit": "cm"
+        },
+        "weight": 250,
+        "color": ["Silver", "Gold", "Black"],
+        "material": "Stainless Steel",
+        "display": "1.9 inch OLED screen",
+        "waterProof": true,
+        "batteryLife": "120 hours"
+      },
+      "shipping": {
+        "method": "Express",
+        "weight": 250,
+        "volume": "1200 ml"
+      },
+      "visibility": "Public",
+      "tags": ["premium", "health monitor", "ECG", "stainless steel"]
+    },
+    {
+      "id": "SW005",
+      "name": "SportFit Fitness Tracker",
+      "brand": "SportFit",
+      "status": "Active",
+      "stock": {
+        "status": "In Stock",
+        "quantity": 210
+      },
+      "price": {
+        "selling": 1950.0,
+        "cost": 980.0,
+        "discount": "25%",
+        "tax": 950.0,
+        "currency": "LKR"
+      },
+      "category": {
+        "main": "Watch",
+        "sub": "Fitness Tracker"
+      },
+      "description": {
+        "overview": "The SportFit Fitness Tracker is the ideal companion for casual fitness enthusiasts. With a lightweight design and long battery life, it tracks your essential health metrics without breaking the bank.",
+        "keyFeatures": [
+          "Step Counter - Accurate tracking with daily goals",
+          "Sleep Monitor - Track deep and light sleep cycles",
+          "Smart Notifications - Stay connected with calls and message alerts",
+          "Water Resistant - Suitable for showering and rain",
+          "7-day Battery Life - Extended usage between charges"
+        ],
+        "technicalSpecification": [
+          "Display: 0.96 inch OLED display",
+          "Battery: 120mAh, up to 7 days usage",
+          "Connectivity: Bluetooth 4.2",
+          "Sensors: 3-axis accelerometer, optical heart rate",
+          "Water Resistance: IP68",
+          "Materials: TPU band, plastic housing"
+        ],
+        "usageAndSetup": [
+          "1. Download SportFit app from your app store",
+          "2. Create account with basic health information",
+          "3. Pair device through app",
+          "4. Customize goals and notification settings"
+        ],
+        "careInstructions": [
+          "Rinse with fresh water after exercise",
+          "Dry thoroughly before charging",
+          "Clean band weekly with mild soap",
+          "Avoid extreme temperatures"
+        ],
+        "warranty": "1 year manufacturer warranty",
+        "returnAndSupport": "21-day no-questions-asked return policy. Support available at help@sportfit.com"
+      },
+      "images": [
+        "/path/to/sportfit-main.jpg",
+        "/path/to/sportfit-1.jpg",
+        "/path/to/sportfit-2.jpg"
+      ],
+      "ratings": {
+        "average": 4.3,
+        "count": 178
+      },
+      "specifications": {
+        "dimensions": {
+          "length": 14,
+          "width": 22,
+          "height": 105,
+          "unit": "cm"
+        },
+        "weight": 150,
+        "color": ["Black", "Blue", "Green", "Pink"],
+        "material": "TPU",
+        "display": "0.96 inch OLED display",
+        "waterProof": true,
+        "batteryLife": "168 hours"
+      },
+      "shipping": {
+        "method": "Standard",
+        "weight": 150,
+        "volume": "500 ml"
+      },
+      "visibility": "Public",
+      "tags": [
+        "fitness band",
+        "activity tracker",
+        "sleep monitor",
+        "steps counter"
+      ]
+    }
+  ]
+}

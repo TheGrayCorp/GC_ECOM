@@ -13,6 +13,7 @@ import Support from "./components/Support";
 import Transaction from "./components/Transaction";
 import LoginScreen from "./pages/LoginScreen";
 import RegisterScreen from "./pages/RegisterScreen";
+import ProductEdit from "./components/Products/ProductEdit";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route index element={<DashboardMain />} />
           <Route path="products" element={<ProductsMain />} />
           <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="products/edit/:id" element={<ProductEdit />} />
           <Route path="orders" element={<Orders />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="customers" element={<ClientsMain />} />
