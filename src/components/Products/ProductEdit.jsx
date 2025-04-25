@@ -53,7 +53,7 @@ export default function ProductEdit() {
           ? productData.color.join(", ")
           : "",
         material: productData.material || "",
-        attributes: productData.attributes || {},
+        attributes: productData.attributes || "",
         featuredProduct: productData.featuredProduct || "",
         visibility: productData.visibility || "public",
         tags: Array.isArray(productData.tags)

@@ -11,6 +11,7 @@ import {
   MenuItem,
   Divider,
 } from "@mui/material";
+import "./edit.css";
 
 const EditOverview = ({ formData, handleChange }) => {
   return (
