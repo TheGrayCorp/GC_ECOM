@@ -1,218 +1,158 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Box, Typography, Button, IconButton } from "@mui/material";
+import { Save, ArrowLeft, MapPin as Location } from "lucide-react";
 import useSWR from "swr";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Card,
-  CardMedia,
-  IconButton,
-  Divider,
-  Grid,
-  Container,
-} from "@mui/material";
-import { Add, Delete } from "@mui/icons-material";
+import { useRef } from "react";
+import EditImage from "./ProductEdit/EditImage";
+import EditDescription from "./ProductEdit/EditDescription";
+import EditOverview from "./ProductEdit/EditOverview";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function ProductEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data, error } = useSWR("/data/products.json", fetcher);
-
+  const { data, error } = useSWR(`/data/products.json`, fetcher);
   const [product, setProduct] = useState(null);
-  const [galleryImages, setGalleryImages] = useState([]);
+  const [formData, setFormData] = useState(null);
 
   useEffect(() => {
     if (data) {
-      const found = data.find((item) => item.id.toString() === id);
-      if (found) {
-        setProduct(found);
-        setGalleryImages(found.gallery || []);
-      }
+      const productData = data.products.find((p) => p.id === id);
+      setProduct(productData);
+      setFormData({
+        ...productData,
+        // Flatten nested objects for easier form handling
+        brand: productData.brand || "",
+        categoryMain: productData.category?.main || "",
+        categorySub: productData.category?.sub || "",
+        status: productData.status || "",
+        stockQuantity: productData.stock?.quantity || 0,
+        sellingPrice: productData.price?.selling || 0,
+        costPrice: productData.price?.cost || 0,
+        discount: productData.price?.discount || 0,
+        tax: productData.price?.tax || 0,
+        weight: productData.specifications?.weight || "",
+        height: productData.specifications?.dimensions?.height || "",
+        width: productData.specifications?.dimensions?.width || "",
+        length: productData.specifications?.dimensions?.length || "",
+        email: productData.contact?.email || "",
+        phone: productData.contact?.phone || "",
+        location: productData.contact?.location || "",
+        shippingClass: productData.shippingClass || "",
+        size: productData.size || "",
+        color: Array.isArray(productData.color)
+          ? productData.color.join(", ")
+          : "",
+        material: productData.material || "",
+        attributes: productData.attributes || "",
+        featuredProduct: productData.featuredProduct || "",
+        visibility: productData.visibility || "public",
+        tags: Array.isArray(productData.tags)
+          ? productData.tags.join(", ")
+          : "",
+        descriptionOverview: productData.description?.overview || "",
+        keyFeatures: Array.isArray(productData.description?.keyFeatures)
+          ? productData.description.keyFeatures.join("\n")
+          : "",
+        technicalSpecification: Array.isArray(
+          productData.description?.technicalSpecification
+        )
+          ? productData.description.technicalSpecification.join("\n")
+          : "",
+        usageAndSetup: Array.isArray(productData.description?.usageAndSetup)
+          ? productData.description.usageAndSetup.join("\n")
+          : "",
+        careInstructions: Array.isArray(
+          productData.description?.careInstructions
+        )
+          ? productData.description.careInstructions.join("\n")
+          : "",
+        warranty: productData.description?.warranty || "",
+        returnAndSupport: productData.description?.returnAndSupport || "",
+      });
     }
   }, [data, id]);
 
-  const handleImageDelete = (index) => {
-    const updatedGallery = [...galleryImages];
-    updatedGallery.splice(index, 1);
-    setGalleryImages(updatedGallery);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleAddImage = () => {
-    setGalleryImages([...galleryImages, product.image]);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically send the updated data to your backend
+    console.log("Form submitted with data:", formData);
 
-  const handleInputChange = (field, value) => {
-    setProduct({ ...product, [field]: value });
-  };
-
-  const handleUpdate = () => {
-    console.log("Updated Product:", { ...product, gallery: galleryImages });
-    navigate(`/products/${id}`);
+    // Navigate back to product details after saving
+    navigate(`/product/${id}`);
   };
 
   const handleCancel = () => {
     navigate(`/products/${id}`);
   };
+  const scrollRef = useRef();
 
-  if (error)
-    return <Typography color="error">Failed to load product</Typography>;
-
-  if (!product) return <Typography>Loading product...</Typography>;
-
-  const detailsLeft = [
-    { field: "name", label: "Product Name" },
-    { field: "category", label: "Category" },
-    { field: "subCategory", label: "Sub Category" },
-    { field: "varity", label: "Varity" },
-    { field: "weight", label: "Weight" },
-    { field: "type", label: "Type" },
-    { field: "brand", label: "Brand" },
-    { field: "maxDiscount", label: "MAX Discount" },
-  ];
-
-  const detailsRight = [
-    { field: "volume", label: "Volume" },
-    { field: "height", label: "Height" },
-    { field: "width", label: "Width" },
-    { field: "length", label: "Length" },
-    { field: "productID", label: "Product ID" },
-    { field: "quantity", label: "Quantity" },
-    { field: "extraCode", label: "Extra Code" },
-    { field: "purchasedPrice", label: "Purchased Price" },
-    { field: "sellingPrice", label: "Selling Price" },
-  ];
+  const scroll = (direction) => {
+    const { current } = scrollRef;
+    if (current) {
+      const scrollAmount = 100 * 3; // Scroll by 3 images
+      current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+  if (error) return <div>Failed to load product data</div>;
+  if (!product || !formData)
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+        <Typography>Loading...</Typography>
+      </Box>
+    );
 
   return (
-    <Box sx={{ width: "100%", p: 3 }}>
-      <Typography variant="h5" mb={2}>
-        {product.name}
-      </Typography>
-      <Divider sx={{ mb: 3 }} />
+    <Box sx={{ padding: 3 }}>
+      <Box display="flex" alignItems="center" gap={2} mb={3}>
+        <IconButton onClick={handleCancel}>
+          <ArrowLeft />
+        </IconButton>
+        <Typography variant="h5">Edit Product</Typography>
+      </Box>
 
-      {/* Image Row */}
-      <Box display="flex" gap={2} flexWrap="wrap" mb={4} width="100%">
-        {/* Main Image */}
-        <Card sx={{ width: 120, bgcolor: "white", p: 1, textAlign: "center" }}>
-          <CardMedia
-            component="img"
-            image={product.image}
-            alt="Main"
-            sx={{ width: "100%", height: 100, objectFit: "contain", mb: 1 }}
+      <form onSubmit={handleSubmit}>
+        <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
+          {/* Left Side - 70% */}
+          <div style={{ width: "100%", flex: "0 0 70%", paddingRight: "16px" }}>
+            {/* Basic Information Section */}
+            <EditOverview formData={formData} handleChange={handleChange} />
+
+            {/* Images Section */}
+            <EditImage product={product} scrollRef={scrollRef} />
+          </div>
+
+          {/* Right Side - 30% */}
+          <EditDescription
+            formData={formData}
+            handleChange={handleChange}
+            scroll={scroll}
           />
-        </Card>
+        </div>
 
-        {/* Gallery Images */}
-        {galleryImages.map((img, idx) => (
-          <Card
-            key={idx}
-            sx={{ width: 120, bgcolor: "white", p: 1, textAlign: "center" }}
-          >
-            <CardMedia
-              component="img"
-              image={img}
-              alt={`Gallery ${idx + 1}`}
-              sx={{ width: "100%", height: 100, objectFit: "contain", mb: 1 }}
-            />
-            <IconButton size="small" onClick={() => handleImageDelete(idx)}>
-              <Delete fontSize="small" />
-            </IconButton>
-          </Card>
-        ))}
-
-        {/* Add Image */}
-        <Card
-          sx={{
-            width: 120,
-            height: 140,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            bgcolor: "white",
-            border: "1px dashed #ccc",
-          }}
-        >
-          <IconButton color="primary" onClick={handleAddImage}>
-            <Add />
-          </IconButton>
-          <Typography variant="caption">Add Image</Typography>
-        </Card>
-      </Box>
-
-      {/* Product Details */}
-      <Grid container spacing={2} sx={{ width: "100%", margin: 0 }}>
-        {/* Left column */}
-        <Grid item xs={12} md={6} sx={{ paddingLeft: "0 !important" }}>
-          {detailsLeft.map(({ field, label }) => (
-            <Box
-              key={field}
-              display="flex"
-              alignItems="center"
-              border="1px solid #ccc"
-              borderRadius="4px"
-              p={1}
-              mb={1}
-              width="100%"
-            >
-              <Typography
-                sx={{ minWidth: "140px", fontWeight: 500, flexShrink: 0 }}
-              >
-                {label} :
-              </Typography>
-              <TextField
-                variant="standard"
-                value={product[field] || ""}
-                onChange={(e) => handleInputChange(field, e.target.value)}
-                fullWidth
-                InputProps={{ disableUnderline: true }}
-              />
-            </Box>
-          ))}
-        </Grid>
-
-        {/* Right column */}
-        <Grid item xs={12} md={6}>
-          {detailsRight.map(({ field, label }) => (
-            <Box
-              key={field}
-              display="flex"
-              alignItems="center"
-              border="1px solid #ccc"
-              borderRadius="4px"
-              p={1}
-              mb={1}
-              width="100%"
-            >
-              <Typography
-                sx={{ minWidth: "140px", fontWeight: 500, flexShrink: 0 }}
-              >
-                {label} :
-              </Typography>
-              <TextField
-                variant="standard"
-                value={product[field] || ""}
-                onChange={(e) => handleInputChange(field, e.target.value)}
-                fullWidth
-                InputProps={{ disableUnderline: true }}
-              />
-            </Box>
-          ))}
-        </Grid>
-      </Grid>
-
-      {/* Action Buttons */}
-      <Box display="flex" gap={2} mt={4}>
-        <Button variant="contained" color="primary" onClick={handleUpdate}>
-          Update
-        </Button>
-        <Button variant="outlined" color="secondary" onClick={handleCancel}>
-          Cancel
-        </Button>
-      </Box>
+        {/* Submit Buttons */}
+        <Box display="flex" justifyContent="flex-end" gap={2} mt={3}>
+          <Button variant="outlined" onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button variant="contained" type="submit" startIcon={<Save />}>
+            Save Changes
+          </Button>
+        </Box>
+      </form>
     </Box>
   );
 }
