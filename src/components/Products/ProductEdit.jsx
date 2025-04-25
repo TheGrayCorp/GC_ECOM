@@ -21,6 +21,13 @@ export default function ProductEdit() {
     if (data) {
       const productData = data.products.find((p) => p.id === id);
       setProduct(productData);
+
+      // Helper function to safely convert to number
+      const toNumber = (value) => {
+        const num = Number(value);
+        return isNaN(num) ? 0 : num;
+      };
+
       setFormData({
         ...productData,
         // Flatten nested objects for easier form handling
@@ -28,11 +35,11 @@ export default function ProductEdit() {
         categoryMain: productData.category?.main || "",
         categorySub: productData.category?.sub || "",
         status: productData.status || "",
-        stockQuantity: productData.stock?.quantity || 0,
-        sellingPrice: productData.price?.selling || 0,
-        costPrice: productData.price?.cost || 0,
-        discount: productData.price?.discount || 0,
-        tax: productData.price?.tax || 0,
+        stockQuantity: toNumber(productData.stock?.quantity),
+        sellingPrice: toNumber(productData.price?.selling),
+        costPrice: toNumber(productData.price?.cost),
+        discount: toNumber(productData.price?.discount),
+        tax: toNumber(productData.price?.tax),
         weight: productData.specifications?.weight || "",
         height: productData.specifications?.dimensions?.height || "",
         width: productData.specifications?.dimensions?.width || "",
@@ -46,7 +53,7 @@ export default function ProductEdit() {
           ? productData.color.join(", ")
           : "",
         material: productData.material || "",
-        attributes: productData.attributes || "",
+        attributes: productData.attributes || {},
         featuredProduct: productData.featuredProduct || "",
         visibility: productData.visibility || "public",
         tags: Array.isArray(productData.tags)
@@ -76,10 +83,10 @@ export default function ProductEdit() {
   }, [data, id]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
+    const { name, value, type } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "number" ? Number(value) : value,
     }));
   };
 
@@ -132,15 +139,15 @@ export default function ProductEdit() {
             <EditOverview formData={formData} handleChange={handleChange} />
 
             {/* Images Section */}
-            <EditImage product={product} scrollRef={scrollRef} />
+            <EditImage
+              product={product}
+              scrollRef={scrollRef}
+              scroll={scroll}
+            />
           </div>
 
           {/* Right Side - 30% */}
-          <EditDescription
-            formData={formData}
-            handleChange={handleChange}
-            scroll={scroll}
-          />
+          <EditDescription formData={formData} handleChange={handleChange} />
         </div>
 
         {/* Submit Buttons */}
