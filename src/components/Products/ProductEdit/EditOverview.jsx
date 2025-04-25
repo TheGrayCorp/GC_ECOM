@@ -6,9 +6,6 @@ import {
   Grid,
   Paper,
   TextField,
-  FormControl,
-  Select,
-  MenuItem,
   Divider,
 } from "@mui/material";
 import "./edit.css";
@@ -77,7 +74,7 @@ const EditOverview = ({ formData, handleChange }) => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid item xs={12} md={3} sx={{ maxWidth: "35%" }}>
                 <Typography
                   variant="subtitle2"
                   sx={{
@@ -151,12 +148,6 @@ const EditOverview = ({ formData, handleChange }) => {
                   }}
                 />
               </Grid>
-            </Grid>
-          </Box>
-
-          {/* Row 2: Stock Quantity, Address, Contact No, Email */}
-          <Box sx={{ mb: 3 }}>
-            <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -270,12 +261,6 @@ const EditOverview = ({ formData, handleChange }) => {
                   }}
                 />
               </Grid>
-            </Grid>
-          </Box>
-
-          {/* Row 3: Selling Price, Cost Price, Discount, Tax */}
-          <Box sx={{ mb: 3 }}>
-            <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -392,12 +377,6 @@ const EditOverview = ({ formData, handleChange }) => {
                   }}
                 />
               </Grid>
-            </Grid>
-          </Box>
-
-          {/* Row 4: Weight, Height, Size, Width */}
-          <Box sx={{ mb: 3 }}>
-            <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -510,12 +489,6 @@ const EditOverview = ({ formData, handleChange }) => {
                   }}
                 />
               </Grid>
-            </Grid>
-          </Box>
-
-          {/* Row 5: Shipping Class, Size, Color, Material */}
-          <Box sx={{ mb: 3 }}>
-            <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -629,12 +602,6 @@ const EditOverview = ({ formData, handleChange }) => {
                   }}
                 />
               </Grid>
-            </Grid>
-          </Box>
-
-          {/* Row 6: Attributes, Featured Product, Visibility, Product Status */}
-          <Box sx={{ mb: 3 }}>
-            <Grid container spacing={2}>
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -675,22 +642,21 @@ const EditOverview = ({ formData, handleChange }) => {
                   Featured Product
                 </Typography>
                 <Divider sx={{ my: 0.5 }} />
-                <FormControl fullWidth size="small">
-                  <Select
-                    name="featured"
-                    value={formData.featured || false}
-                    onChange={handleChange}
-                    sx={{
-                      fontFamily: "Inter",
-                      fontWeight: 500,
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <MenuItem value={true}>Yes</MenuItem>
-                    <MenuItem value={false}>No</MenuItem>
-                  </Select>
-                </FormControl>
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="featured"
+                  value={formData.featured || ""}
+                  onChange={handleChange}
+                  sx={{
+                    fontFamily: "Inter",
+                    fontWeight: 500,
+                    fontSize: "0.9rem",
+                  }}
+                  placeholder="true / false"
+                />
               </Grid>
+
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -703,23 +669,21 @@ const EditOverview = ({ formData, handleChange }) => {
                   Visibility
                 </Typography>
                 <Divider sx={{ my: 0.5 }} />
-                <FormControl fullWidth size="small">
-                  <Select
-                    name="visibility"
-                    value={formData.visibility}
-                    onChange={handleChange}
-                    sx={{
-                      fontFamily: "Inter",
-                      fontWeight: 500,
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <MenuItem value="public">Public</MenuItem>
-                    <MenuItem value="private">Private</MenuItem>
-                    <MenuItem value="draft">Draft</MenuItem>
-                  </Select>
-                </FormControl>
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="visibility"
+                  value={formData.visibility || ""}
+                  onChange={handleChange}
+                  sx={{
+                    fontFamily: "Inter",
+                    fontWeight: 500,
+                    fontSize: "0.9rem",
+                  }}
+                  placeholder="public / private / draft"
+                />
               </Grid>
+
               <Grid item xs={12} md={3}>
                 <Typography
                   variant="subtitle2"
@@ -732,30 +696,21 @@ const EditOverview = ({ formData, handleChange }) => {
                   Product Status
                 </Typography>
                 <Divider sx={{ my: 0.5 }} />
-                <FormControl fullWidth size="small">
-                  <Select
-                    name="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                    sx={{
-                      fontFamily: "Inter",
-                      fontWeight: 500,
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    <MenuItem value="active">Active</MenuItem>
-                    <MenuItem value="draft">Draft</MenuItem>
-                    <MenuItem value="outOfStock">Out of Stock</MenuItem>
-                    <MenuItem value="discontinued">Discontinued</MenuItem>
-                  </Select>
-                </FormControl>
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="status"
+                  value={formData.status || ""}
+                  onChange={handleChange}
+                  sx={{
+                    fontFamily: "Inter",
+                    fontWeight: 500,
+                    fontSize: "0.9rem",
+                  }}
+                  placeholder="active / draft / outOfStock / discontinued"
+                />
               </Grid>
-            </Grid>
-          </Box>
 
-          {/* Row 7: Tags (full width) */}
-          <Box>
-            <Grid container>
               <Grid item xs={12}>
                 <Typography
                   variant="subtitle2"

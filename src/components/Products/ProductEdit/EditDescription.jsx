@@ -3,153 +3,103 @@ import PropTypes from "prop-types";
 import { Box, Typography, Paper, TextField, Button } from "@mui/material";
 
 const EditDescription = ({ formData, handleChange }) => {
+  const labelStyle = {
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 500,
+    fontSize: "1rem",
+    mb: 0.2,
+  };
+
+  const inputStyle = {
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 300,
+    fontSize: "0.85rem",
+  };
+
+  const fields = [
+    { label: "Overview", name: "descriptionOverview", rows: 3 },
+    { label: "Key Features", name: "keyFeatures", rows: 3 },
+    {
+      label: "Technical Specification",
+      name: "technicalSpecification",
+      rows: 3,
+    },
+    { label: "Usage & Setup", name: "usageAndSetup", rows: 3 },
+    { label: "Care Instructions", name: "careInstructions", rows: 3 },
+    { label: "Warranty", name: "warranty", rows: 2 },
+    { label: "Return & Support", name: "returnAndSupport", rows: 2 },
+  ];
+
   return (
-    <>
-      <div style={{ width: "100%", flex: "0 0 30%" }}>
-        {/* Description Section */}
-        <Paper sx={{ p: 3, height: "100%" }}>
-          <Typography variant="h6" mb={2} className="font-inter font-medium">
-            Description
-          </Typography>
+    <div style={{ width: "100%", flex: "0 0 30%" }}>
+      <Paper sx={{ p: 3, height: "100%" }}>
+        <Typography
+          variant="h6"
+          mb={2}
+          sx={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+        >
+          Description
+        </Typography>
 
-          <TextField
-            fullWidth
-            label="Overview"
-            name="descriptionOverview"
-            value={formData.descriptionOverview}
-            onChange={handleChange}
-            multiline
-            rows={4}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          <TextField
-            fullWidth
-            label="Key Features (one per line)"
-            name="keyFeatures"
-            value={formData.keyFeatures}
-            onChange={handleChange}
-            multiline
-            rows={4}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          <TextField
-            fullWidth
-            label="Technical Specification (one per line)"
-            name="technicalSpecification"
-            value={formData.technicalSpecification}
-            onChange={handleChange}
-            multiline
-            rows={4}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          <TextField
-            fullWidth
-            label="Usage & Setup (one per line)"
-            name="usageAndSetup"
-            value={formData.usageAndSetup}
-            onChange={handleChange}
-            multiline
-            rows={4}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          <TextField
-            fullWidth
-            label="Care Instructions (one per line)"
-            name="careInstructions"
-            value={formData.careInstructions}
-            onChange={handleChange}
-            multiline
-            rows={4}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          <TextField
-            fullWidth
-            label="Warranty"
-            name="warranty"
-            value={formData.warranty}
-            onChange={handleChange}
-            multiline
-            rows={2}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          <TextField
-            fullWidth
-            label="Return & Support"
-            name="returnAndSupport"
-            value={formData.returnAndSupport}
-            onChange={handleChange}
-            multiline
-            rows={2}
-            variant="outlined"
-            margin="normal"
-            InputLabelProps={{ className: "font-inter font-medium" }}
-            InputProps={{ className: "font-inter font-light" }}
-          />
-
-          {/* Add More Description Section */}
-          <Box mt={2}>
-            <Button
-              variant="outlined"
+        {fields.map((field) => (
+          <Box key={field.name} mb={1}>
+            <Typography sx={labelStyle}>{field.label}</Typography>
+            <TextField
               fullWidth
-              className="font-inter font-medium"
-              sx={{ mb: 2 }}
-            >
-              + Add more Description
-            </Button>
-            <Paper elevation={2} sx={{ p: 2 }}>
+              name={field.name}
+              value={formData[field.name]}
+              onChange={handleChange}
+              multiline
+              rows={field.rows}
+              variant="outlined"
+              InputProps={{ sx: inputStyle }}
+            />
+          </Box>
+        ))}
+
+        {/* Extra Description Section */}
+        <Box mt={2}>
+          <Button
+            variant="outlined"
+            fullWidth
+            sx={{
+              mb: 2,
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 400,
+              fontSize: "0.85rem",
+            }}
+          >
+            + Add more Description
+          </Button>
+          <Paper elevation={2} sx={{ p: 2 }}>
+            <Box mb={1.5}>
+              <Typography sx={labelStyle}>Heading</Typography>
               <TextField
                 fullWidth
-                label="Heading"
                 name="extraHeading"
                 value={formData.extraHeading}
                 onChange={handleChange}
                 variant="outlined"
-                margin="normal"
-                InputLabelProps={{ className: "font-inter font-medium" }}
-                InputProps={{ className: "font-inter font-light" }}
+                InputProps={{ sx: inputStyle }}
               />
+            </Box>
+            <Box mb={1.5}>
+              <Typography sx={labelStyle}>Subject</Typography>
               <TextField
                 fullWidth
-                label="Subject"
                 name="extraContent"
                 value={formData.extraContent}
                 onChange={handleChange}
                 multiline
-                rows={4}
+                rows={3}
                 variant="outlined"
-                margin="normal"
-                InputLabelProps={{ className: "font-inter font-medium" }}
-                InputProps={{ className: "font-inter font-light" }}
+                InputProps={{ sx: inputStyle }}
               />
-            </Paper>
-          </Box>
-        </Paper>
-      </div>
-    </>
+            </Box>
+          </Paper>
+        </Box>
+      </Paper>
+    </div>
   );
 };
 
